@@ -43,7 +43,7 @@ jobs:
       - checkout  # 检出代码
       - run:
           name: Install Flask
-          command: pip install flask  # 安装 Flask
+          command: pip install flask tensorflow pillow matplotlib numpy   # 安装 Flask
       - run:
           name: Run the Application
           command: python app.py  # 运行应用程序
