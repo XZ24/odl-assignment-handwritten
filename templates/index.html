@@ -8,6 +8,59 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body onload="init()" class="bg-white-100">
+
+     <nav class="flex justify-between items-center py-4 px-6 bg-gray shadow-md">
+        <div class="px-10 text-2xl font-bold text-pink-600">APU ODL</div>
+        
+        <a href="#" class="bg-pink-600 text-white px-4 py-2 rounded-lg shadow hover:bg-pink-700">Get in Touch</a>
+    </nav>
+
+    <header class="px-16 py-32 flex justify-between items-center px-6 py-12 bg-pink-50">
+        <div class="max-w-lg">
+            <h1 class="text-4xl font-bold text-gray-800">Turn your business to next level</h1>
+            <p class="mt-4 text-gray-600">Enjoy team diversity and increase their networks among others people in various fields by providing an exceptional facilities and coworking.</p>
+            <div class="mt-8 flex space-x-4">
+                <a href="#" class="border border-gray-300 py-2 px-4 rounded-lg flex items-center">
+                    <img src="apple-logo.svg" alt="Apple Store" class="w-6 h-6 mr-2"> Available on Apple Store
+                </a>
+                <a href="#" class="border border-gray-300 py-2 px-4 rounded-lg flex items-center">
+                    <img src="google-play-logo.svg" alt="Google Play" class="w-6 h-6 mr-2"> Available on Google Play
+                </a>
+            </div>
+        </div>
+        <div class="relative">
+            <img src="mobile-mockup.png" alt="Mobile Mockup" class="w-80 h-auto">
+        </div>
+    </header>
+
+
+    <section class="px-16 py-32 text-center py-16">
+        <h2 class="text-3xl font-bold mb-8">You can benefit more than you think</h2>
+        <div class="flex justify-center space-x-8">
+            <div class="bg-white shadow-lg rounded-lg p-6 w-1/3">
+                <img src="icon1.png" alt="No Setup" class="mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-2">No Setup</h3>
+                <p class="text-gray-500">They generate alignment and engagement.</p>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-6 w-1/3">
+                <img src="icon2.png" alt="Free Trial" class="mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-2">Free Trial</h3>
+                <p class="text-gray-500">They generate alignment and engagement.</p>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-6 w-1/3">
+                <img src="icon3.png" alt="Quick Access" class="mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-2">Quick Access</h3>
+                <p class="text-gray-500">They generate alignment and engagement.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
     <div class="bg-white py-8 sm:py-12">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl lg:text-center">
@@ -17,24 +70,53 @@
             </div>
         </div>
     </div>
-    <section id="content" class="py-8">
-        <div id="sketchpadapp" class="mx-auto max-w-7xl px-6 lg:px-8 ">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="flex flex-col justify-center items-center">
-                    <canvas id="sketchpad" class="border border-gray-300" height="200" width="200"></canvas>
-                    <div class="mt-4">
-                        <button type="button" class="btn btn-dark" id="clear_button">Clear</button>
-                    </div>
+
+
+
+
+
+
+
+
+
+
+    <section id="content" class="py-32">
+        <div id="sketchpadapp" class="mx-auto max-w-7xl px-6 lg:px-8 flex flex-wrap items-center justify-center">
+            <div class="w-full sm:w-auto px-8 py-4 flex flex-col items-center">
+                <canvas id="sketchpad" class="border border-gray-300" height="200" width="200"></canvas>
+                <div class="mt-4">
+                    <button type="button" class="btn btn-dark" id="clear_button">Clear</button>
                 </div>
-                <div class="flex flex-col justify-center items-center">
-                    <!-- Add div to contain the bar chart -->
-                    <div class="mt-8">
-                        <canvas id="barChart" width="600" height="200"></canvas>
-                    </div>
+            </div>
+            <div class="w-full sm:w-auto px-8 py-4 flex flex-col items-center">
+                <!-- Add div to contain the bar chart -->
+                <div class="mt-8">
+                    <canvas id="barChart1" width="600" height="200"></canvas>
+                </div>
+                <div class="mt-8">
+                    <canvas id="barChart2" width="600" height="200"></canvas>
+                </div>
+                <div class="mt-8">
+                    <canvas id="barChart3" width="600" height="200"></canvas>
                 </div>
             </div>
         </div>
     </section>
+    
+    
+    
+
+    <footer class="bg-blue-100 py-12">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Get the latest app updates</h2>
+            
+        </div>
+    </footer>
+    
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='scripts.js') }}" charset="utf-8"></script>
 </body>

@@ -1,7 +1,7 @@
 var canvas, ctx;
 var mouseX, mouseY, mouseDown = 0;
 var touchX, touchY;
-var barChart;
+var barChart1, barChart2, barChart3;
 var confidencePercentages = Array(10).fill(0);
 var debounceTimeout;
 
@@ -31,7 +31,11 @@ function draw(ctx, x, y, size, isDown) {
         ctx.closePath();
         ctx.stroke();
         clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(predict, 100); 
+        debounceTimeout = setTimeout(function() {
+            predict_1();
+            predict_2();
+            predict_3();
+        }, 100);
     }
     lastX = x;
     lastY = y;
@@ -89,7 +93,8 @@ function getTouchPos(e) {
         }
     }
 }
-function predict() {
+
+function predict_1() {
     var imageData = canvas.toDataURL();
     fetch('/predict', {
         method: 'POST',
@@ -100,7 +105,43 @@ function predict() {
     })
     .then(response => response.json())
     .then(data => {
-        updateChart(data.results);
+        updateChart1(data.results);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function predict_2() {
+    var imageData = canvas.toDataURL();
+    fetch('/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ image_data: imageData })
+    })
+    .then(response => response.json())
+    .then(data => {
+        updateChart2(data.results);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function predict_3() {
+    var imageData = canvas.toDataURL();
+    fetch('/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ image_data: imageData })
+    })
+    .then(response => response.json())
+    .then(data => {
+        updateChart3(data.results);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -115,13 +156,13 @@ document.getElementById('clear_button').addEventListener("click",
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     });
 
-// Output
-function updateChart(confidenceArray) {
-    if (!barChart) {
+// Update Chart 1
+function updateChart1(confidenceArray) {
+    if (!barChart1) {
         var chartData = {
             labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
             datasets: [{
-                label: 'Confidence Percentage',
+                label: 'Confidence Percentage (Chart 1)',
                 backgroundColor: confidenceArray.map((confidence, index) => {
                     return generateColor(index);
                 }),
@@ -145,17 +186,105 @@ function updateChart(confidenceArray) {
                 }]
             }
         };
-        barChart = new Chart(document.getElementById('barChart'), {
+        barChart1 = new Chart(document.getElementById('barChart1'), {
             type: 'bar',
             data: chartData,
             options: chartOptions
         });
     } else {
-        barChart.data.datasets[0].data = confidenceArray.map(confidence => confidence * 100);
-        barChart.data.datasets[0].backgroundColor = confidenceArray.map((confidence, index) => {
+        barChart1.data.datasets[0].data = confidenceArray.map(confidence => confidence * 100);
+        barChart1.data.datasets[0].backgroundColor = confidenceArray.map((confidence, index) => {
             return generateColor(index);
         });
-        barChart.update();
+        barChart1.update();
+    }
+}
+
+// Update Chart 2
+function updateChart2(confidenceArray) {
+    if (!barChart2) {
+        var chartData = {
+            labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            datasets: [{
+                label: 'Confidence Percentage (Chart 2)',
+                backgroundColor: confidenceArray.map((confidence, index) => {
+                    return generateColor(index);
+                }),
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: confidenceArray.map(confidence => confidence * 100)
+            }]
+        };
+
+        var chartOptions = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        callback: function(value) {
+                            return value + '%'; 
+                        }
+                    }
+                }]
+            }
+        };
+        barChart2 = new Chart(document.getElementById('barChart2'), {
+            type: 'bar',
+            data: chartData,
+            options: chartOptions
+        });
+    } else {
+        barChart2.data.datasets[0].data = confidenceArray.map(confidence => confidence * 100);
+        barChart2.data.datasets[0].backgroundColor = confidenceArray.map((confidence, index) => {
+            return generateColor(index);
+        });
+        barChart2.update();
+    }
+}
+
+// Update Chart 3
+function updateChart3(confidenceArray) {
+    if (!barChart3) {
+        var chartData = {
+            labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            datasets: [{
+                label: 'Confidence Percentage (Chart 3)',
+                backgroundColor: confidenceArray.map((confidence, index) => {
+                    return generateColor(index);
+                }),
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: confidenceArray.map(confidence => confidence * 100)
+            }]
+        };
+
+        var chartOptions = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        callback: function(value) {
+                            return value + '%'; 
+                        }
+                    }
+                }]
+            }
+        };
+        barChart3 = new Chart(document.getElementById('barChart3'), {
+            type: 'bar',
+            data: chartData,
+            options: chartOptions
+        });
+    } else {
+        barChart3.data.datasets[0].data = confidenceArray.map(confidence => confidence * 100);
+        barChart3.data.datasets[0].backgroundColor = confidenceArray.map((confidence, index) => {
+            return generateColor(index);
+        });
+        barChart3.update();
     }
 }
 
@@ -177,5 +306,7 @@ function generateColor(number) {
 
 document.addEventListener("DOMContentLoaded", function() {
     init();
-    updateChart(confidencePercentages);
+    updateChart1(confidencePercentages);
+    updateChart2(confidencePercentages);
+    updateChart3(confidencePercentages);
 });

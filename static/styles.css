@@ -1,5 +1,109 @@
 /* Some CSS styling */
 
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+  background-color: #fceef3;
+}
+
+header .text {
+  max-width: 50%;
+}
+
+header h1 {
+  font-size: 48px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+header p {
+  font-size: 18px;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+header .buttons {
+  margin-top: 30px;
+}
+
+header .buttons a {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #e74c3c;
+  border-radius: 8px;
+  color: #e74c3c;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+header .buttons a:hover {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+header img {
+  width: 350px;
+}
+
+nav {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .logo {
+  font-size: 24px;
+  color: #e74c3c;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 20px;
+}
+
+nav ul li a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav ul li a:hover {
+  color: #e74c3c;
+}
+
+nav .cta {
+  background-color: #e74c3c;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav .cta:hover {
+  background-color: #c0392b;
+}
+
+
+
+
+
+
 #sketchpadapp {
     /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
     -webkit-touch-callout: none;
