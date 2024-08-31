@@ -6,11 +6,11 @@ import io
 import base64
 from flask import Flask, render_template, request, jsonify
 
-# 创建 Modal stub
-stub = modal.Stub()
+# 创建 Modal App
+app = modal.App()
 
 # 定义一个 Modal 函数，用于加载模型并进行预测
-@stub.function()
+@app.function()
 def load_and_predict(image_data):
     # 加载模型（假设模型已保存在某个公共存储位置）
     model = load_model("model/model.h5")
@@ -28,23 +28,23 @@ def load_and_predict(image_data):
     return prediction.flatten().tolist()
 
 # 创建 Flask 应用
-app = Flask(__name__)
+flask_app = Flask(__name__)
 
 # Flask 路由，用于处理预测请求
-@app.route('/predict', methods=['POST'])
+@flask_app.route('/predict', methods=['POST'])
 def predict():
     image_data = request.json['image_data']
     
     # 调用 Modal 函数进行预测
-    with stub.run():
+    with app.run():
         prediction = load_and_predict.call(image_data)
     
     return jsonify({'results': prediction})
 
 # Flask 路由，渲染主页
-@app.route('/')
+@flask_app.route('/')
 def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    flask_app.run(debug=True)
