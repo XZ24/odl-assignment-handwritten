@@ -29,6 +29,11 @@ def predict():
     prediction = prediction.flatten().tolist()
     return jsonify({'results': prediction})
 
+# Test route
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({'message': 'Server is running'})
+
 # Home route
 @app.route('/')
 def index():
